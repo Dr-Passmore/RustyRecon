@@ -9,10 +9,14 @@ fn main() {
 }
 
 fn scan_directory(path: &str) {
+    // Create a new WalkDir iterator for the given path
     WalkDir::new(path)
+    // Get an iterator of directory entries and filter out any errors
     .into_iter()
     .filter_map(Result::ok)
+    // Convert the iterator to a parallel iterator for better performance
     .par_bridge()
+    // For each file print path
     .for_each(|entry| {
         let path = entry.path();
         if path.is_file() {
