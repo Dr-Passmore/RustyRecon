@@ -1,12 +1,16 @@
 use std::fs;
+use std::time::{Instant};
 
 use rayon::prelude::*;
 use walkdir::WalkDir;
 
 fn main() {
+    let start = Instant::now();
     println!("Hello, world!");
     let path = r#"C:\test"#;
-    scan_directory(path)
+    scan_directory(path);
+    let duration = start.elapsed();
+    println!("Time elapsed in expensive_function() is: {:?}", duration);
 
 }
 
