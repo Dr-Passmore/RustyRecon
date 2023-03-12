@@ -13,7 +13,17 @@ fn main() {
     println!("Time elapsed in expensive_function() is: {:?}", duration);
 
 }
-
+/// Recursively scans a directory and prints the size of each file in a readable format.
+///
+/// # Arguments
+///
+/// * `path` - A string slice that represents the path of the directory to scan.
+///
+/// # Examples
+///
+/// ```
+/// scan_directory("C:\\test");
+/// ```
 fn scan_directory(path: &str) {
     // Create a new WalkDir iterator for the given path
     WalkDir::new(path)
@@ -37,6 +47,7 @@ fn scan_directory(path: &str) {
 }
 
 fn size_readable_format(size: u64) -> String {
+    // Sets size conversions
     const KB: u64 = 1024;
     const MB: u64 = KB * 1024;
     const GB: u64 = MB * 1024;
@@ -53,4 +64,15 @@ fn size_readable_format(size: u64) -> String {
     } else {
         format!("{:.2} TB", size as f64 / TB as f64)
     }
+}
+
+
+// Tests
+#[test]
+fn test_size_readable_format() {
+    assert_eq!(size_readable_format(1023), "1023 B");
+    assert_eq!(size_readable_format(1024), "1.00 KB");
+    assert_eq!(size_readable_format(1024 * 1024), "1.00 MB");
+    assert_eq!(size_readable_format(1024 * 1024 * 1024), "1.00 GB");
+    assert_eq!(size_readable_format(1024 * 1024 * 1024 * 1024), "1.00 TB");
 }
