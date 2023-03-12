@@ -1,3 +1,5 @@
+use std::fs;
+
 use rayon::prelude::*;
 use walkdir::WalkDir;
 
@@ -20,7 +22,14 @@ fn scan_directory(path: &str) {
     .for_each(|entry| {
         let path = entry.path();
         if path.is_file() {
-            println!("{}", path.display());
+            if let Ok(metadata) = fs::metadata(path) {
+                // add size
+                let size = metadata.len();
+                println!("{} ({} bytes)", path.display(),size);
+
+            }
+            
+            
         }
     }) 
     
