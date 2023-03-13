@@ -46,6 +46,22 @@ fn scan_directory(path: &str) {
     
 }
 
+/// Convert the given size in bytes to a human-readable format with appropriate units (KB, MB, GB, TB).
+///
+/// # Arguments
+///
+/// * `size`  - The size in bytes to be converted to a human-readable format.
+/// 
+/// # Returns
+/// 
+/// * A String containing the human-readable size with appropriate units.
+///
+/// # Examples
+///```
+/// let size = 1500000000;
+/// let readable_size = size_readable_format(size);
+/// println!("{}", readable_size); // prints "1.40 GB"
+/// ```
 fn size_readable_format(size: u64) -> String {
     // Sets size conversions
     const KB: u64 = 1024;
